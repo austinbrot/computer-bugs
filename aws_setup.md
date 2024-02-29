@@ -54,13 +54,25 @@ ssh <your-host>
 ~~~~
 
 ### Moving your files ###
-Presumably, you have files on the HPC that you need moved to the AWS instance you've just created. The firewall won't let you connect from an AWS instance, so you'll have to log into the HPC and transfer files from there. Your options are either `scp` or `rsync`. There are lots of examples of how to use these online. If you're copying large files, or large numbers of files, you should use `rsync` because it will let you resume if the connection drops. Starting from your local machine, you'll need to:
+Presumably, you have files on the HPC that you need moved to the AWS instance you've just created. The firewall won't let you connect from an AWS instance, so you'll have to log into the HPC and transfer files from there. Your options are either __scp__ or __rsync__. There are lots of examples of how to use these online. If you're copying large files, or large numbers of files, you should use __rsync__ because it will let you resume if the connection drops. Starting from your local machine, you'll need to:
 
-1. Transfer your key to the HCP like so: `scp path/to/key_name.pem <hcp>:~/.ssh`
+1. Transfer your key to the HCP like so
+~~~
+scp path/to/key_name.pem <hcp>:~/.ssh
+~~~
 
 2. Log into the HCP and add the host config to your `.ssh/config` on your HPC. You should add the same host config as you did on your personal machine.
 
-3. Transfer the files you want like so: `rsync -rzP path/to/local/dir <your-host>:/path/to/remote/dir`. `r` makes it recursive so you can copy a directory, `z` compresses files during the transfer, and `P` shows progress and tracks progress so it can restart if the connection is lost. This can take a long time, up to hours if your files are large enough, and might be best to run it in a batch script.
+3. Transfer the files you want like so
+~~~
+rsync -rzP path/to/local/dir <your-host>:/path/to/remote/dir
+~~~
+`r` makes it recursive so you can copy a directory, `z` compresses files during the transfer, and `P` shows progress and tracks progress so it can restart if the connection is lost. This can take a long time, up to hours if your files are large enough, and might be best to run it in a batch script.
+
+When you want to transfer files between your personal machine and the AWS instance, you can use __scp__ or __rsync__ but with the argument order switched like
+~~~
+rsync -rzP <your-host>:/path/to/remote/dir path/to/local/dir
+~~~
 
 ### Running Scripts ###
 

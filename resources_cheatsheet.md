@@ -1,5 +1,5 @@
 # Resources Cheetsheet #
-Quick guide to understanding the resource demands of your slurm scripts. If your script, or its `sbatch` arguments, is borrowed, then it might be worth confirming that the `sbatch` arguments are correct.
+Quick guide to understanding the resource demands of your slurm scripts. If your script, or its `sbatch` arguments, is borrowed, then it might be worth confirming that the arguments are correct.
 
 A more detailed reference for `sbatch` arguments can be found in the [slurm docs](https://slurm.schedmd.com/sbatch.html)
 

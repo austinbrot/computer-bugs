@@ -36,7 +36,7 @@ ssh -i path/to/key_name.pem ubuntu@<public_dns_name>
 
 ### Associating an Elastic IP ###
 
-If yould like a more convenient way of logging in, navigate to the Elastic IP section of the AWS console under `Privacy and Secrity`. Click the orange `Allocate Elastic IP address` button. Keep the defaults, scroll to the bottom, and press `Allocate`. Click on the new Elastic IP address. Click the orange `Associate IP Address` button at the top. Select your instance and click `Associate`. Your instance will now have a permanent IP address.
+If you'd like a more convenient way of logging in, navigate to the Elastic IP section of the AWS console under `Privacy and Secrity`. Click the orange `Allocate Elastic IP address` button. Keep the defaults, scroll to the bottom, and press `Allocate`. Click on the new Elastic IP address. Click the orange `Associate IP Address` button at the top. Select your instance and click `Associate`. Your instance will now have a permanent IP address.
 
 First, add the following template code to your `.ssh/config` file:
 

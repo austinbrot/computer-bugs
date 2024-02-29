@@ -36,9 +36,9 @@ ssh -i path/to/key_name.pem ubuntu@<public_dns_name>
 
 ### Associating an Elastic IP ###
 
-7. If yould like a more convenient way of logging in, navigate to the Elastic IP section of the AWS console under `Privacy and Secrity`. Click the orange `Allocate Elastic IP address` button. Keep the defaults, scroll to the bottom, and press `Allocate`. Click on the new Elastic IP address. Click the orange `Associate IP Address` button at the top. Select your instance and click `Associate`. Your instance will now have a permanent IP address.
+If yould like a more convenient way of logging in, navigate to the Elastic IP section of the AWS console under `Privacy and Secrity`. Click the orange `Allocate Elastic IP address` button. Keep the defaults, scroll to the bottom, and press `Allocate`. Click on the new Elastic IP address. Click the orange `Associate IP Address` button at the top. Select your instance and click `Associate`. Your instance will now have a permanent IP address.
 
-8. Add the following template code to your `.ssh/config` file:
+First, add the following template code to your `.ssh/config` file:
 
 ```
 Host <your-host>
@@ -48,7 +48,7 @@ Host <your-host>
     Port 22
 ```
 
-Once you have this set up, you can __SSH__ into the instance using 
+Once you have this set up, you can __SSH__ into the instance using:
 ~~~~
 ssh <your-host>
 ~~~~
@@ -56,14 +56,14 @@ ssh <your-host>
 ### Moving your files ###
 Presumably, you have files on the HPC that you need moved to the AWS instance you've just created. The firewall won't let you connect from an AWS instance, so you'll have to log into the HPC and transfer files from there. Your options are either __scp__ or __rsync__. There are lots of examples of how to use these online. If you're copying large files, or large numbers of files, you should use __rsync__ because it will let you resume if the connection drops. Starting from your local machine, you'll need to:
 
-1. Transfer your key to the HCP like so
+1. Transfer your key to the HCP like so:
 ~~~
 scp path/to/key_name.pem <hcp>:~/.ssh
 ~~~
 
 2. Log into the HCP and add the host config to your `.ssh/config` on your HPC. You should add the same host config as you did on your personal machine.
 
-3. Transfer the files you want like so
+3. Transfer the files you want like so:
 ~~~
 rsync -rzP path/to/local/dir <your-host>:/path/to/remote/dir
 ~~~
@@ -78,19 +78,19 @@ rsync -rzP <your-host>:/path/to/remote/dir path/to/local/dir
 
 Running a script on the AWS instance is like running them on your local machine. You'll need to set up the packages you need before you can run anything.
 
-Also, scripts run directly from the terminal (__docker__ is an exception) will not stay alive when you disconnect your __SSH__ session. There are a few ways to handle this, and you're free to pick your favorite. I'd recommend [__tmux__](https://github.com/tmux/tmux/wiki), which is probably installed by default on your instance. If not, run `sudo apt-get tmux`. __tmux__ works in "sessions" that you open, that will stay running even when you're not connected to the instance, and that you can "attach" to the next time you log in. To start a new __tmux__ session, run 
+Also, scripts run directly from the terminal (__docker__ is an exception) will not stay alive when you disconnect your __SSH__ session. There are a few ways to handle this, and you're free to pick your favorite. I'd recommend [__tmux__](https://github.com/tmux/tmux/wiki), which is probably installed by default on your instance. If not, run `sudo apt-get tmux`. __tmux__ works in "sessions" that you open, that will stay running even when you're not connected to the instance, and that you can "attach" to the next time you log in. To start a new __tmux__ session, run:
 ~~~
 tmux new -s <my-session>
 ~~~
-to open a new session. Once you're inside, it will act almost exactly like your normal terminal but it will stay running in the background until you close it explicitly. I say almost because scrolling, copying, and a few other things are more complicated and it's helpful to use a [cheatsheet](https://tmuxcheatsheet.com/). When you're done working on that session but don't want to close it, press `<CTRL> + b` then `d`. The next time you want to access your session, run 
+to open a new session. Once you're inside, it will act almost exactly like your normal terminal but it will stay running in the background until you close it explicitly. I say almost because scrolling, copying, and a few other things are more complicated and it's helpful to use a [cheatsheet](https://tmuxcheatsheet.com/). When you're done working on that session but don't want to close it, press `<CTRL> + b` then `d`. The next time you want to access your session, run:
 ~~~
 tmux attach -t <my-session>
 ~~~
-You can open as many sessions as you'd like, and see the names of sessions you have open with 
+You can open as many sessions as you'd like, and see the names of sessions you have open with:
 ~~~
 tmux ls
 ~~~
-Logging off won't get rid of sessions, so you'll need to close them once you're done with
+Logging off won't get rid of sessions, so you'll need to close them once you're done with:
 ~~~
 tmux kill-session -t <my-session>
 ~~~
@@ -101,5 +101,11 @@ or they'll keep running until you stop the instance.
 10. You can stop the VM by navigating to the instance page, clicking "Instance state", and then selecting "Stop instance".
 ![Stop instance](figs/stop_instance.png?raw=true)
 
-Note that terminating the instance will delete the instance and all associated files. Instances can be stopped in the AWS web console or by running `sudo shutdown -P now` while logged in.
+Instances can be stopped in the AWS web console or by running 
+~~~
+sudo shutdown -P now
+~~~
+while logged in.
+
+__Note: Terminating the instance rather than stopping it will delete the instance and all associated files.__
 

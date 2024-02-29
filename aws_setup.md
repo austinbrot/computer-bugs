@@ -98,7 +98,7 @@ or they'll keep running until you stop the instance.
 
 ### Stopping the VM ###
 
-10. You can stop the VM by navigating to the instance page, clicking "Instance state", and then selecting "Stop instance".
+You can stop the VM by navigating to the instance page, clicking "Instance state", and then selecting "Stop instance".
 ![Stop instance](figs/stop_instance.png?raw=true)
 
 Instances can be stopped in the AWS web console or by running 

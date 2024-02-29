@@ -13,7 +13,7 @@ NOTE: __Please don't forget to SHUT DOWN your instances when you're done for the
 
 ![Ubuntu](figs/ubuntu.png?raw=true)
 
-3. Choose an instance type. Which you'll need will depend on the resources your scripts need, specifically 1) how many CPUs you need and 2) how much RAM you need. If you don't know, check the `resources_cheatsheet.md`. If these two parameters are correct, your jobs will probably run. Different instances might cost more or less based on how fast the CPUs are or other factors, but they will all run the jobs.
+3. Choose an instance type. Which you'll need will depend on the resources your scripts need, specifically 1) how many CPUs (AWS calls them vCPUs) and 2) how much RAM (AWS calls it memory). If you don't know, check the `resources_cheatsheet.md`. If these two parameters are correct, your jobs will probably run. Different instances might cost more or less based on how fast the CPUs are or other factors, but they will all run the jobs.
 
 ![Instance type](figs/instance_type.png?raw=true)
 

@@ -1,8 +1,8 @@
 # AWS Setup Instructions #
 
-Here are the steps for how to get setup for running on AWS.
+Here are the steps for how to get setup on AWS. This assumes you already have the login information for the lab account.
 
-NOTE: __Please don't forget to SHUT DOWN your instances when you're done for the day to avoid burning through money overnight!__
+NOTE: __Don't forget to shut down your instances when you're done for the day to avoid burning through money overnight!__
 
 ### Creating a VM ###
 
